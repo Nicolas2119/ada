@@ -15,6 +15,7 @@ import python_weather
 import googlemaps # Added for travel duration
 from datetime import datetime # Added for travel duration
 from dotenv import load_dotenv # Added for API key loading
+from .WIDGETS import home_automation
 
 # --- Load Environment Variables ---
 load_dotenv()
@@ -80,12 +81,42 @@ class ADA:
                 }, required=["origin", "destination"]
             )
         )
+        self.ac_power_func = types.FunctionDeclaration(
+            name="ac_power",
+            description="Turn the AC on or off via home automation.",
+            parameters=types.Schema(
+                type=types.Type.OBJECT,
+                properties={"state": types.Schema(type=types.Type.STRING, description="on or off")},
+                required=["state"]
+            )
+        )
+        self.light_power_func = types.FunctionDeclaration(
+            name="light_power",
+            description="Turn a light on or off via home automation.",
+            parameters=types.Schema(
+                type=types.Type.OBJECT,
+                properties={"state": types.Schema(type=types.Type.STRING, description="on or off")},
+                required=["state"]
+            )
+        )
+        self.tv_power_func = types.FunctionDeclaration(
+            name="tv_power",
+            description="Turn the TV on or off via home automation.",
+            parameters=types.Schema(
+                type=types.Type.OBJECT,
+                properties={"state": types.Schema(type=types.Type.STRING, description="on or off")},
+                required=["state"]
+            )
+        )
         # --- End Function Declarations ---
 
         # --- Map function names to actual methods (Added get_travel_duration) ---
         self.available_functions = {
             "get_weather": self.get_weather,
-            "get_travel_duration": self.get_travel_duration # Added mapping
+            "get_travel_duration": self.get_travel_duration,
+            "ac_power": self.ac_power,
+            "light_power": self.light_power,
+            "tv_power": self.tv_power
         }
 
         # --- Google Search Tool (Grounding) ---
@@ -102,7 +133,10 @@ class ADA:
             # ---> Updated tools list <---
             tools=[self.google_search_tool, types.Tool(code_execution=types.ToolCodeExecution,function_declarations=[
                 self.get_weather_func,
-                self.get_travel_duration_func # Add the new function here
+                self.get_travel_duration_func,
+                self.ac_power_func,
+                self.light_power_func,
+                self.tv_power_func
                 ])]
         )
         # --- End Configuration ---
@@ -210,6 +244,21 @@ class ADA:
             print(f"Error calling _sync_get_travel_duration via to_thread: {e}")
             return {"duration_result": f"Failed to execute travel duration request: {e}"}
     # --- End Travel Duration Functions ---
+
+    async def ac_power(self, state: str) -> dict:
+        """Turn the AC on or off via home automation."""
+        result = await asyncio.to_thread(home_automation.ac_power, state)
+        return {"result": result}
+
+    async def light_power(self, state: str) -> dict:
+        """Turn a light on or off via home automation."""
+        result = await asyncio.to_thread(home_automation.light_power, state)
+        return {"result": result}
+
+    async def tv_power(self, state: str) -> dict:
+        """Turn the TV on or off via home automation."""
+        result = await asyncio.to_thread(home_automation.tv_power, state)
+        return {"result": result}
 
 
     async def clear_queues(self, text=""):
