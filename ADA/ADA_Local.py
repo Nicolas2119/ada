@@ -7,7 +7,7 @@ import torch  # Import the torch library
 import re
 import time
 import os
-from .WIDGETS import system, timer, project, camera
+from .WIDGETS import system, timer, project, camera, home_automation
 
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 VOICE_ID = 'pFZP5JQG7iQjIQuC4Bku'
@@ -67,6 +67,14 @@ class ADA:
                 Args:
                     folder_name (str): The name of the project folder to create.
                 """
+            def home_automation.ac_power(state: str):
+                """Turn the AC on or off."""
+
+            def home_automation.light_power(state: str):
+                """Turn a light on or off."""
+
+            def home_automation.tv_power(state: str):
+                """Turn the TV on or off."""
         ```
 
         User: {user_message}

@@ -62,6 +62,11 @@ Both `ada_online` and `multimodal_live_api.py` require API keys for cloud servic
     GOOGLE_API_KEY=YOUR_GOOGLE_AI_STUDIO_KEY_HERE
     ELEVENLABS_API_KEY=YOUR_ELEVENLABS_KEY_HERE
     MAPS_API_KEY=YOUR_Maps_API_KEY_HERE
+    HOME_ASSISTANT_URL=http://localhost:8123/api/services
+    HOME_ASSISTANT_TOKEN=YOUR_LONG_LIVED_TOKEN
+    AC_ENTITY_ID=climate.your_ac
+    LIGHT_ENTITY_ID=light.living_room
+    TV_ENTITY_ID=media_player.living_room_tv
     ```
 
 3.  **Get the Keys:**
@@ -190,6 +195,7 @@ ADA (`ada_local` and `ada_online`) can utilize several built-in functions/tools:
   - `system.py`: Provides system hardware information.
   - `timer.py`: Sets countdown timers.
   - `to_do_list.py`: Manages a simple to-do list. (_Not integrated_)
+  - `home_automation.py`: Send on/off commands to smart devices via Home Assistant.
 - **Online Tools (Gemini API):** Used by `ada_online` versions.
   - `GoogleSearch`: Accesses Google Search for current information.
   - `get_weather`: Fetches weather using `python-weather`.
