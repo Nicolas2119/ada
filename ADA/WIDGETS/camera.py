@@ -3,8 +3,6 @@ import cv2
 def open():
     """Opens the default camera using OpenCV and displays the video feed. Press 'q' to exit."""
 
-    return "Camera is open"
-
     global cap  # Access the global cap variable
     cap = cv2.VideoCapture(0)
 
@@ -22,3 +20,7 @@ def open():
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+    cap.release()
+    cv2.destroyAllWindows()
+    return "Camera closed"
