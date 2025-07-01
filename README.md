@@ -185,7 +185,7 @@ Once `main_local.py`, `main_online.py`, or `main_online_noelevenlabs.py` is runn
 ADA (`ada_local` and `ada_online`) can utilize several built-in functions/tools:
 
 - **Local Widgets (`WIDGETS/` directory):** Primarily used by `ada_local`.
-  - `camera.py`: Opens the default camera feed. (_Note: Implementation returns string, doesn't keep feed open_)
+  - `camera.py`: Opens the default camera feed and shows it until you press `q`.
   - `project.py`: Creates project folders.
   - `system.py`: Provides system hardware information.
   - `timer.py`: Sets countdown timers.
