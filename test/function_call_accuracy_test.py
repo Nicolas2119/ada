@@ -31,7 +31,7 @@ system_instructions = """
     You speak with a british accent and address people as Sir.
 """
 
-instruction_prompt_with_function_calling = '''At each turn, if you decide to invoke any of the function(s), it should be wrapped with ```tool_code```. If you decide to call a function the response should only have the function wrapped in tool code nothing more. The python methods described below are imported and available, you can only use defined methods also only call methods when you are sure they need to be called. The generated code should be readable and efficient. The response to a method will be wrapped in ```tool_output``` use it generate a helpful, friendly response. For example if the tool output says ```tool_output camera on```. You should say something like "The Camera is on".
+instruction_prompt_with_function_calling = '''At each turn, if you decide to invoke any of the function(s), it should be wrapped with ```tool_code```. If you decide to call a function the response should only have the function wrapped in tool code nothing more. The python methods described below are imported and available, you can only use defined methods also only call methods when you are sure they need to be called. The generated code should be readable and efficient. The response to a method will be wrapped in ```tool_output``` use it to generate a helpful, friendly response. For example if the tool output says ```tool_output camera on```. You should say something like "The Camera is on".
 
 For regular prompts do not call any functions or wrap the response in ```tool_code```.
 
